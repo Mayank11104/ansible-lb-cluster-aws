@@ -1,0 +1,14 @@
+# Terraform
+.terraform/
+*.tfstate
+*.tfstate.*
+*.tfplan
+
+# SSH Keys
+terra-ec2-instance-key
+terra-ec2-instance-key.pub
+
+# OS
+.DS_Store
+Thumbs.db
+.terraform.lock.hcl
