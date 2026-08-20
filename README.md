@@ -8,32 +8,10 @@ The setup consists of 4 EC2 instances spanning different operating systems (Amaz
 
 ## Architecture
 
-```
-                         ┌──────────────────────┐
-                         │   Ansible Master Node │
-                         │     (Ubuntu)          │
-                         │  Controls all nodes   │
-                         └──────────┬─────────────┘
-                                    │ SSH
-                 ┌──────────────────┼──────────────────┐
-                 │                  │                   │
-                 ▼                  ▼                   ▼
-        ┌────────────────┐ ┌────────────────┐ ┌────────────────┐
-        │   Worker 1     │ │   Worker 2     │ │   Worker 3     │
-        │ (Amazon Linux) │ │   (Ubuntu)     │ │ (RHEL 10)      │
-        │                │ │                │ │                │
-        │  LOAD BALANCER │ │ BACKEND SERVER │ │ BACKEND SERVER │
-        │  Nginx Reverse │ │  Nginx + HTML  │ │  Nginx + HTML  │
-        │  Proxy         │ │                │ │                │
-        └────────────────┘ └────────────────┘ └────────────────┘
-               │                   ▲                   ▲
-               │     Round Robin   │                   │
-               └───────────────────┴───────────────────┘
-```
+![AWS Architecture Diagram](architecture.png)
 
 When a user hits the public IP of Worker 1, Nginx forwards the request to one of the backend servers using the Round-Robin algorithm. Each refresh routes the traffic to the next server in the pool.
 
----
 
 ## Tech Stack
 
